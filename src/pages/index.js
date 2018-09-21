@@ -1,15 +1,50 @@
 import React from 'react'
-import { Link } from 'gatsby'
+import { graphql } from 'gatsby'
 
 import Layout from '../components/layout'
 
-const IndexPage = () => (
+const IndexPage = ({ data }) => (
   <Layout>
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <Link to="/page-2/">Go to page 2</Link>
+    {data.allContentfulPost.edges.map(edge => {
+      return <div>
+        <h2>{edge.node.title}</h2>
+        {/* avatarは空のときもあるので三項演算子で処理する */}
+        {edge.node.author.avatar &&
+          <img width={40} src={edge.node.author.avatar.resolutions.src}/>
+        }
+        <small>{edge.node.author.name}</small>
+        <p>{edge.node.content.content}</p>
+      </div>
+    })}
   </Layout>
 )
+
+export const query = graphql`
+{
+  allContentfulPost {
+    edges {
+      node {
+        title
+        content {
+          content
+        }
+        author {
+          name
+          description {
+            description
+          }
+          avatar {
+            resolutions {
+              width
+              height
+              src
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`
 
 export default IndexPage
