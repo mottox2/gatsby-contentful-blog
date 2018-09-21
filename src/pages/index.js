@@ -13,7 +13,7 @@ const IndexPage = ({ data }) => (
         {edge.node.author.avatar &&
           <img width={40} src={author.avatar.resolutions.src} alt={author.name} />
         }
-        <small>{edge.node.author.name}</small>
+        <small>{author.name}</small>
         <p>{edge.node.content.content}</p>
       </div>
     })}
