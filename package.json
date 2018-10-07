@@ -5,12 +5,12 @@
   "author": "mottox2 <y.mottox2@gmail.com>",
   "dependencies": {
     "dotenv": "^6.0.0",
-    "gatsby": "2.0.6",
-    "gatsby-plugin-manifest": "2.0.2",
+    "gatsby": "2.0.15",
+    "gatsby-plugin-manifest": "2.0.4",
     "gatsby-plugin-offline": "2.0.5",
     "gatsby-plugin-react-helmet": "3.0.0",
     "gatsby-source-contentful": "^2.0.1",
-    "gatsby-transformer-remark": "^2.1.4",
+    "gatsby-transformer-remark": "^2.1.6",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-helmet": "^5.2.0"

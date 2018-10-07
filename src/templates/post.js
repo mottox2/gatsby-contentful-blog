@@ -1,34 +1,42 @@
-import React from 'react'
-import { graphql } from 'gatsby'
+import React from "react"
+import { graphql } from "gatsby"
 
-import Layout from '../components/layout'
+import Layout from "../components/layout"
 
-export default (props) => {
+const Post = props => {
   const post = props.data.contentfulPost
-  return <Layout>
-    <h2>{post.title}</h2>
-    <div dangerouslySetInnerHTML={{__html: post.content.content}}/>
-  </Layout>
+  const author = post.author
+  const avatar = author.avatar
+  return (
+    <Layout>
+      <h1>{post.title}</h1>
+      {avatar && (
+        <img width={40} height={40 / avatar.fixed.width * avatar.fixed.height} src={avatar.fixed.src} alt={author.name} />
+      )}
+      <small>
+        {author.name} | {post.publishedAt}
+      </small>
+      <div dangerouslySetInnerHTML={{ __html: post.content.childMarkdownRemark.html }} />
+    </Layout>
+  )
 }
+
+export default Post
 
 export const query = graphql`
   query($slug: String!) {
     contentfulPost(slug: { eq: $slug }) {
-      slug
       title
+      publishedAt(formatString:"YYYY/MM/DD")
       content {
-        content
         childMarkdownRemark {
           html
         }
       }
       author {
         name
-        description {
-          description
-        }
         avatar {
-          resolutions {
+          fixed {
             width
             height
             src
